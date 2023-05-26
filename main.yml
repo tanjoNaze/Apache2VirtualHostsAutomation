@@ -3,13 +3,23 @@
 - name: Installation de Apache2 sur le serveur
   hosts: apache2
   remote_user: root
+  vars:
+    domains:
+      - www.hei.school
+      - front.hei.school
+      - back.hei.School
+      - api.hei.school
 
   tasks:
-    - name: Install required tools
-      apt: name={{ item }} update_cache=yes state=latest
+    - name: Installing all the required tools
+      apt:
+        name: "{{ item }}"
+        update_cache: yes
+        state: latest
       with_items:
         - apache2
-        - sudo
-        - git        
-
+    
+    - name: Creating the HTML files of the docs
+      command: echo "{{ item }}"
+      loop: "{{ domains }}"
 ...
