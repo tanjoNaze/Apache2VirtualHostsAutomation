@@ -33,10 +33,5 @@
       ansible.builtin.template:
         src: templates/domain.conf.j2
         dest: /etc/apache2/sites-available/{{ item }}.conf
-
-    - name: Creating the HTML files of each domain name
-      ansible.builtin.template:
-        src: templates/index.html.j2
-        dest: /var/www/{{ item }}/index.html
       loop: "{{ domains }}"
 ...
