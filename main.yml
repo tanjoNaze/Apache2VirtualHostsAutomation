@@ -34,4 +34,11 @@
         src: templates/domain.conf.j2
         dest: /etc/apache2/sites-available/{{ item }}.conf
       loop: "{{ domains }}"
+
+    - name: Creating the symbolic links
+      command: ln -s /etc/apache2/sites-available/{{ item }}.conf /etc/apache2/sites-enabled/{{ item }}.conf
+      loop: "{{ domains }}"
+
+    - name: Restart the apache2 server
+      command: /etc/init.d/apache2 restart
 ...
