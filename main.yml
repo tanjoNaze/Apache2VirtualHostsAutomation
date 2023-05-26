@@ -18,8 +18,14 @@
         state: latest
       with_items:
         - apache2
+
+    - name: Creating the directories for the HTML files
+      command: mkdir /var/www/{{ item }}
+      loop: "{{ domains }}"
     
     - name: Creating the HTML files of the docs
-      command: echo "{{ item }}"
+      ansible.builtin.template:
+        src: templates/index.html.j2
+        dest: /var/www/{{ item }}/index.html
       loop: "{{ domains }}"
 ...
