@@ -23,7 +23,7 @@
       command: mkdir /var/www/{{ item }}
       loop: "{{ domains }}"
     
-    - name: Creating the HTML files of the docs
+    - name: Creating the HTML files of each domain name
       ansible.builtin.template:
         src: templates/index.html.j2
         dest: /var/www/{{ item }}/index.html
